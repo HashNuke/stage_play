@@ -14,6 +14,9 @@ defmodule StagePlay do
       supervisor(StagePlay.Endpoint, []),
       # Start your own worker by calling: StagePlay.Worker.start_link(arg1, arg2, arg3)
       # worker(StagePlay.Worker, [arg1, arg2, arg3]),
+
+      worker(StagePlay.HelloProducer, []),
+      worker(StagePlay.HelloConsumer, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
