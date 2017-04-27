@@ -12,16 +12,13 @@ defmodule StagePlay.HelloProducer do
   end
 
 
-  def sync_notify(event, timeout \\ 5000) do
-    GenStage.call(__MODULE__, {:notify, event}, timeout)
-  end
-
-
+  # Handle events to dispatch immediately
   def handle_call({:notify, event}, _from, state) do
-    {:reply, :ok, [event], state} # Dispatch immediately
+    {:reply, :ok, [event], state}
   end
 
 
+  # Check buffer for demand and return events
   def handle_demand(demand, state) when demand > 0 do
     Logger.info "Handling demand: #{demand}"
     {:noreply, [], state}
